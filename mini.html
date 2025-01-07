@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini project</title>
+  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin: 10px 0;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .clock {
+            font-size: 50px;
+            color: white;
+            background-color: black;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>VOWEL COUNTER</h1>
+        <textarea id="inputText" placeholder="Enter words here..."></textarea>
+        <h2>Vowel Count: <span id="vowelCount">0</span></h2>
+        <button onclick="countVowels()">Check Vowels</button>
+        <button onclick="resetText()">Reset</button>
+
+        <h1>Hour Format Digital Clock</h1>
+        <div class="clock" id="clock"></div>
+        <script>
+        function countVowels() {
+            const text = document.getElementById('inputText').value;
+            const vowels = text.match(/[agcvgsAHID]/g);
+            const count = vowels ? vowels.length : 0;
+            document.getElementById('vowelCount').textContent = count;
+        }
+
+        function resetText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('vowelCount').textContent = '0';
+        }
+
+        
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12 || 12;   
+            const time = `${pad(hours)}:${pad(minutes)}:${pad(seconds)} ${ampm}`;
+            document.getElementById('clock').textContent = time;
+        }
+
+        function pad(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); 
+    </script>
+ </body>
+ </html>
+ 
